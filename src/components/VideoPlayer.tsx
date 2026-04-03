@@ -206,8 +206,8 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
         {/* Video */}
         <video
           ref={videoRef}
-          src={video.url}
           autoPlay
+          playsInline
           className="w-full h-full object-contain"
           preload="metadata"
           loop={looping}
