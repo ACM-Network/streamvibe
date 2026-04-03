@@ -103,7 +103,7 @@ export const MOCK_VIDEOS: Video[] = [
     channelSubscribers: 8400000,
     tags: ['AI', 'Technology', 'Research', 'Future', 'Machine Learning'],
     category: 'Technology',
-    url: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    url: "https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9telcmjhcs/liveabr/pub-iotv9telcmjhcs/live_720p/chunks.m3u8",
     is4K: true,
     isHDR: true,
     chapters: [
