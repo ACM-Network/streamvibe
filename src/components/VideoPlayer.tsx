@@ -249,7 +249,6 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
           className="w-full h-full object-contain"
           preload="metadata"
           loop={looping}
-          playsInline
           onClick={e => e.stopPropagation()}
         />
 
