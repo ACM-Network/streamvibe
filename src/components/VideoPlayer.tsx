@@ -50,6 +50,8 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
   const [seekPreview, setSeekPreview] = useState<string | null>(null)
   const [looping, setLooping] = useState(false)
   const [showBookmarkToast, setShowBookmarkToast] = useState(false)
+  const [levels, setLevels] = useState<any[]>([]);
+  const [currentLevel, setCurrentLevel] = useState(-1); // -1 = auto
 
   const controlsTimeout = useRef<NodeJS.Timeout>()
 
