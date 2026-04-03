@@ -103,7 +103,7 @@ export const MOCK_VIDEOS: Video[] = [
     channelSubscribers: 8400000,
     tags: ['AI', 'Technology', 'Research', 'Future', 'Machine Learning'],
     category: 'Technology',
-    url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    url: 'url: "https://www.w3schools.com/html/mov_bbb.mp4',
     is4K: true,
     isHDR: true,
     chapters: [
