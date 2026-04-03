@@ -127,7 +127,8 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
 
   if (video.url.endsWith(".m3u8")) {
     if (Hls.isSupported()) {
-      hls = new Hls();
+      const hls = new Hls();
+      hlsRef.current = hls;
 
       hls.loadSource(video.url);
       hls.attachMedia(vid);
