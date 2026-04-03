@@ -396,7 +396,6 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
                     <div className="py-2">
                       <p className="px-4 py-2 text-xs font-semibold text-white/30 uppercase tracking-wider">Playback Settings</p>
                       {[
-                        { label: 'Quality', value: quality, tab: 'quality' as const, icon: Layers },
                         { label: 'Speed', value: `${speed}x`, tab: 'speed' as const, icon: Gauge },
                         { label: 'Subtitles', value: showSubtitles ? selectedSubtitle : 'Off', tab: 'subtitles' as const, icon: Subtitles },
                       ].map(({ label, value, tab, icon: Icon }) => (
@@ -425,24 +424,6 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
                           <div className={clsx('absolute top-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform', looping ? 'translate-x-4' : 'translate-x-0.5')} />
                         </div>
                       </button>
-                    </div>
-                  )}
-
-                  {settingsTab === 'quality' && (
-                    <div className="py-2">
-                      <button className="flex items-center gap-2 px-4 py-2 text-sm text-white/50 hover:text-white" onClick={() => setSettingsTab('main')}>
-                        <ChevronLeft size={16} /> Quality
-                      </button>
-                      {(video.quality || ['1080p', '720p', '480p']).map(q => (
-                        <button
-                          key={q}
-                          className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-white/[0.06] text-sm"
-                          onClick={() => { setQuality(q); setSettingsTab('main') }}
-                        >
-                          <span className={quality === q ? 'text-brand-400 font-semibold' : 'text-white/80'}>{q}</span>
-                          {quality === q && <Check size={14} className="text-brand-400" />}
-                        </button>
-                      ))}
                     </div>
                   )}
 
