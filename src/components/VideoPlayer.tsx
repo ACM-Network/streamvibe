@@ -27,6 +27,7 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
   const containerRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const progressRef = useRef<HTMLDivElement>(null)
+  const hlsRef = useRef<Hls | null>(null);
   const { playerVolume, setPlayerVolume, playerMuted, setPlayerMuted, addToHistory } = useStore()
 
   const [playing, setPlaying] = useState(false)
@@ -121,8 +122,6 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
   useEffect(() => {
   const vid = videoRef.current;
   if (!vid || !video?.url) return;
-
-  const hlsRef = useRef<Hls | null>(null);
 
   console.log("VIDEO URL:", video.url);
 
