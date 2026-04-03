@@ -116,11 +116,17 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
 
   let hls: Hls | null = null;
 
-  console.log("VIDEO URL:", video.url); // debug
+  console.log("VIDEO URL:", video.url);
+
+  // 🔴 CLEAR OLD SOURCE (CRITICAL FIX)
+  vid.pause();
+  vid.removeAttribute("src");
+  vid.load();
 
   if (video.url.endsWith(".m3u8")) {
     if (Hls.isSupported()) {
       hls = new Hls();
+
       hls.loadSource(video.url);
       hls.attachMedia(vid);
 
@@ -136,9 +142,12 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
   }
 
   return () => {
-    if (hls) hls.destroy();
+    if (hls) {
+      hls.destroy();
+    }
   };
 }, [video]);
+  
   // Keyboard shortcuts
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
