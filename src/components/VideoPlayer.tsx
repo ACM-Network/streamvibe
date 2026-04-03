@@ -133,9 +133,10 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
       hls.loadSource(video.url);
       hls.attachMedia(vid);
 
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        vid.play().catch(() => {});
-      });
+      hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
+  setLevels(hls.levels);
+  vid.play().catch(() => {});
+});
 
     } else if (vid.canPlayType("application/vnd.apple.mpegurl")) {
       vid.src = video.url;
