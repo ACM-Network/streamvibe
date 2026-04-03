@@ -111,46 +111,34 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
   }, [Math.floor(currentTime / 10)])
 
   useEffect(() => {
-  const video = videoRef.current;
-  if (!video || !videoData?.url) return;
+  const vid = videoRef.current;
+  if (!vid || !video?.url) return;
 
   let hls: Hls | null = null;
 
-  // Check if it's an HLS stream
-  if (videoData.url.includes(".m3u8")) {
+  console.log("VIDEO URL:", video.url); // debug
 
+  if (video.url.endsWith(".m3u8")) {
     if (Hls.isSupported()) {
       hls = new Hls();
+      hls.loadSource(video.url);
+      hls.attachMedia(vid);
 
-      // Load your stream
-      hls.loadSource(videoData.url);
-
-      // Attach to video element
-      hls.attachMedia(video);
-
-      // Optional: auto play after manifest loaded
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        video.play().catch(() => {});
+        vid.play().catch(() => {});
       });
 
-    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      // Safari native support
-      video.src = videoData.url;
+    } else if (vid.canPlayType("application/vnd.apple.mpegurl")) {
+      vid.src = video.url;
     }
-
   } else {
-    // fallback for normal mp4
-    video.src = videoData.url;
+    vid.src = video.url;
   }
 
-  // Cleanup (VERY IMPORTANT)
   return () => {
-    if (hls) {
-      hls.destroy();
-    }
+    if (hls) hls.destroy();
   };
-}, [videoData]);
-
+}, [video]);
   // Keyboard shortcuts
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
