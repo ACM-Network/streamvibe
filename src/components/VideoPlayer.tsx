@@ -110,6 +110,47 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
     }
   }, [Math.floor(currentTime / 10)])
 
+  useEffect(() => {
+  const video = videoRef.current;
+  if (!video || !videoData?.url) return;
+
+  let hls: Hls | null = null;
+
+  // Check if it's an HLS stream
+  if (videoData.url.includes(".m3u8")) {
+
+    if (Hls.isSupported()) {
+      hls = new Hls();
+
+      // Load your stream
+      hls.loadSource(videoData.url);
+
+      // Attach to video element
+      hls.attachMedia(video);
+
+      // Optional: auto play after manifest loaded
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.play().catch(() => {});
+      });
+
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      // Safari native support
+      video.src = videoData.url;
+    }
+
+  } else {
+    // fallback for normal mp4
+    video.src = videoData.url;
+  }
+
+  // Cleanup (VERY IMPORTANT)
+  return () => {
+    if (hls) {
+      hls.destroy();
+    }
+  };
+}, [videoData]);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
