@@ -114,7 +114,7 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
   const vid = videoRef.current;
   if (!vid || !video?.url) return;
 
-  let hls: Hls | null = null;
+  const hlsRef = useRef<Hls | null>(null);
 
   console.log("VIDEO URL:", video.url);
 
