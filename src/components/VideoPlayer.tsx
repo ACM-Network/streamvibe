@@ -52,6 +52,12 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
   const [showBookmarkToast, setShowBookmarkToast] = useState(false)
   const [levels, setLevels] = useState<any[]>([]);
   const [currentLevel, setCurrentLevel] = useState(-1); // -1 = auto
+  const changeQuality = (levelIndex: number) => {
+  if (!hlsRef.current) return;
+
+  hlsRef.current.currentLevel = levelIndex;
+  setCurrentLevel(levelIndex);
+};
 
   const controlsTimeout = useRef<NodeJS.Timeout>()
 
