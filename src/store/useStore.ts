@@ -149,7 +149,7 @@ export const useStore = create<AppState>()(
       addToPlaylist: (playlistId, videoId) => set((s) => ({
         playlists: s.playlists.map((p) =>
           p.id === playlistId
-            ? { ...p, videoIds: [...new Set([...p.videoIds, videoId])] }
+            ? { ...p, videoIds: Array.from(new Set([...p.videoIds, videoId])) }
             : p
         ),
       })),
