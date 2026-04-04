@@ -12,7 +12,7 @@ import {
 } from 'lucide-react'
 import VideoPlayer from '@/components/VideoPlayer'
 import VideoCard from '@/components/VideoCard'
-import { MOCK_, MOCK_COMMENTS, Video, Comment, formatViews, formatTimeAgo, formatSubscribers } from '@/utils/mockData'
+import { formatViews, formatTimeAgo, formatSubscribers } from '@/utils/mockData'
 import { useStore } from '@/store/useStore'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
