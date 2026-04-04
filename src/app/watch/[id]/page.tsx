@@ -319,7 +319,8 @@ const handleAutoplayNext = () => {
                  <img 
   src={video.channelAvatar || "/default.png"} 
   alt={video.channelName || "Channel"} 
-/> className="w-11 h-11 rounded-full object-cover ring-2 ring-white/10 group-hover:ring-brand-500/40 transition-all" />
+  className="w-11 h-11 rounded-full object-cover ring-2 ring-white/10 group-hover:ring-brand-500/40 transition-all" 
+/>
                   <div>
                     <div className="flex items-center gap-1.5">
                       <span className="font-semibold text-white group-hover:text-brand-300 transition-colors">{video.channelName}</span>
