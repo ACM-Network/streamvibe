@@ -1,4 +1,6 @@
 'use client'
+import { doc, getDoc, updateDoc, increment } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -17,6 +19,7 @@ import toast from 'react-hot-toast'
 
 function CommentItem({ comment, depth = 0 }: { comment: Comment; depth?: number }) {
   const [showReplies, setShowReplies] = useState(false)
+  const [views, setViews] = useState(0);
   const [liked, setLiked] = useState(false)
   const [disliked, setDisliked] = useState(false)
   const [replying, setReplying] = useState(false)
