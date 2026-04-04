@@ -442,6 +442,36 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
                   {settingsTab === 'main' && (
                     <div className="py-2">
                       <p className="px-4 py-2 text-xs font-semibold text-white/30 uppercase tracking-wider">Playback Settings</p>
+                      {levels.length > 0 && (
+  <>
+    <div className="mx-4 my-2 h-px bg-white/[0.06]" />
+
+    <p className="px-4 py-2 text-xs text-white/40">Quality</p>
+
+    <button
+      className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-white/[0.06] text-sm"
+      onClick={() => changeQuality(-1)}
+    >
+      <span className={currentLevel === -1 ? 'text-brand-400 font-semibold' : 'text-white/80'}>
+        Auto
+      </span>
+      {currentLevel === -1 && <Check size={14} className="text-brand-400" />}
+    </button>
+
+    {levels.map((lvl, i) => (
+      <button
+        key={i}
+        className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-white/[0.06] text-sm"
+        onClick={() => changeQuality(i)}
+      >
+        <span className={currentLevel === i ? 'text-brand-400 font-semibold' : 'text-white/80'}>
+          {lvl.height}p
+        </span>
+        {currentLevel === i && <Check size={14} className="text-brand-400" />}
+      </button>
+    ))}
+  </>
+)}
                       {[
                         { label: 'Speed', value: `${speed}x`, tab: 'speed' as const, icon: Gauge },
                         { label: 'Subtitles', value: showSubtitles ? selectedSubtitle : 'Off', tab: 'subtitles' as const, icon: Subtitles },
