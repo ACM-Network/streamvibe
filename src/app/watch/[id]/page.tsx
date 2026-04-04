@@ -95,7 +95,7 @@ function CommentItem({ comment, depth = 0 }: { comment: Comment; depth?: number 
 export default function WatchPage() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
-  const video = MOCK_VIDEOS.find(v => v.id === id) || MOCK_VIDEOS[0]
+  const docRef = doc(db, "videos", id)
   const related = MOCK_VIDEOS.filter(v => v.id !== video.id)
 
   const { likedVideos, dislikedVideos, savedVideos, subscriptions, notificationsEnabled, toggleLike, toggleDislike, toggleSaved, toggleSubscription, toggleNotification, addToQueue, autoplay, setAutoplay } = useStore()
