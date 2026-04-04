@@ -85,6 +85,18 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
 
     const onLoadedMetadata = () => setDuration(vid.duration)
     const onTimeUpdate = () => {
+  setCurrentTime(vid.currentTime);
+
+  if (vid.buffered.length > 0) {
+    setBuffered(vid.buffered.end(vid.buffered.length - 1));
+  }
+
+  // 🔴 LIVE EDGE CHECK
+  if (isLive) {
+    const diff = vid.duration - vid.currentTime;
+    setIsBehindLive(diff > 3); // 3 seconds behind
+  }
+};
       setCurrentTime(vid.currentTime)
       if (vid.buffered.length > 0) {
         setBuffered(vid.buffered.end(vid.buffered.length - 1))
