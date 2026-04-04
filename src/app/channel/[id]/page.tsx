@@ -70,7 +70,7 @@ if (!video) return <div className="text-white p-6">Loading...</div>
               <span>·</span>
               <span>{formatSubscribers(video.channelSubscribers)} subscribers</span>
               <span>·</span>
-              <span>{channelVideos.length} videos</span>
+              <span>{Videos.length} videos</span>
               <span>·</span>
               <span>{formatViews(video.views * 50)} views</span>
             </div>
@@ -136,11 +136,11 @@ if (!video) return <div className="text-white p-6">Loading...</div>
             </div>
             {layout === 'grid' ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {channelVideos.map(v => <VideoCard key={v.id} video={v} showChannel={false} />)}
+                {Videos.map(v => <VideoCard key={v.id} video={v} showChannel={false} />)}
               </div>
             ) : (
               <div className="space-y-6">
-                {channelVideos.map(v => <VideoCard key={v.id} video={v} layout="list" showChannel={false} />)}
+                {Videos.map(v => <VideoCard key={v.id} video={v} layout="list" showChannel={false} />)}
               </div>
             )}
           </>
@@ -171,7 +171,7 @@ if (!video) return <div className="text-white p-6">Loading...</div>
 
         {['Home', 'Shorts', 'Playlists', 'Community'].includes(activeTab) && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {channelVideos.slice(0, 8).map(v => <VideoCard key={v.id} video={v} showChannel={false} />)}
+            {Videos.slice(0, 8).map(v => <VideoCard key={v.id} video={v} showChannel={false} />)}
           </div>
         )}
       </div>
