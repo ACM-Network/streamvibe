@@ -427,7 +427,9 @@ const handleAutoplayNext = () => {
 
               {/* Comments List */}
               <div className="space-y-6">
-                {[].map(c => <CommentItem key={c.id} comment={c} />)}
+                {([] as any[]).map((c: any) => (
+  <CommentItem key={c.id} comment={c} />
+))}
               </div>
             </div>
           </div>
