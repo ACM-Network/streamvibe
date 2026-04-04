@@ -89,8 +89,8 @@ export const MOCK_VIDEOS: Video[] = [
   {
     id: 'v001',
     title: 'TV9 Live Telugu',
-    description: `WATCH FOR FREE
-    thumbnail: https://akamaividz2.zee5.com/image/upload/w_720,h_405,c_scale,f_webp,q_auto:eco/resources/0-9-258/list/1920x1080listf159579f9b3641f9967581c6fe07d2f7.jpg,
+    description: 'WATCH FOR FREE'
+    thumbnail: 'https://akamaividz2.zee5.com/image/upload/w_720,h_405,c_scale,f_webp,q_auto:eco/resources/0-9-258/list/1920x1080listf159579f9b3641f9967581c6fe07d2f7.jpg',
     duration: '🔴LIVE',
     durationSeconds: 3154,
     views: 4821000,
