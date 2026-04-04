@@ -26,7 +26,7 @@ export default function ChannelPage() {
       data.push({ id: doc.id, ...doc.data() })
     })
 
-    const filtered = data.filter(v => v?.channelId === id)
+    const filtered = data.filter(v => v?.channelId && v.channelId === id)
     setVideos(filtered)
   }
 
@@ -74,13 +74,13 @@ const notifications = notificationsEnabled.includes(video?.channelId || "")
               <span>·</span>
               <span>{videos.length} videos</span>
               <span>·</span>
-              <span>{formatViews((video?.views || 0) * 50)} views</span>
+              <span>{formatViews((video?.views || 0) * 50)} total views</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
             {subscribed && (
               <button
-                onClick={() => toggleNotification(video.channelId)}
+                onClick={() => toggleNotification(video?.channelId || "")}
                 className="p-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-white/50 hover:text-white transition-all"
               >
                 {notifications ? <Bell size={18} className="text-brand-400" /> : <BellOff size={18} />}
@@ -161,7 +161,7 @@ const notifications = notificationsEnabled.includes(video?.channelId || "")
               </div>
               <div className="flex items-center gap-3 text-white/50">
                 <span className="text-white/30 w-24">Views</span>
-                <span>{formatViews(video.views * 50)} total views</span>
+                <span>{formatViews((video?.views || 0) * 50)} total views</span>
               </div>
               <div className="flex items-center gap-3 text-white/50">
                 <span className="text-white/30 w-24">Country</span>
