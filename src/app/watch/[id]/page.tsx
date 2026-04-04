@@ -12,7 +12,7 @@ import {
 } from 'lucide-react'
 import VideoPlayer from '@/components/VideoPlayer'
 import VideoCard from '@/components/VideoCard'
-import { MOCK_VIDEOS, MOCK_COMMENTS, Video, Comment, formatViews, formatTimeAgo, formatSubscribers } from '@/utils/mockData'
+import { MOCK_, MOCK_COMMENTS, Video, Comment, formatViews, formatTimeAgo, formatSubscribers } from '@/utils/mockData'
 import { useStore } from '@/store/useStore'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
@@ -96,7 +96,7 @@ export default function WatchPage() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
   const docRef = doc(db, "videos", id)
-  const related = MOCK_VIDEOS.filter(v => v.id !== video.id)
+  const related: any[] = []
 
   const { likedVideos, dislikedVideos, savedVideos, subscriptions, notificationsEnabled, toggleLike, toggleDislike, toggleSaved, toggleSubscription, toggleNotification, addToQueue, autoplay, setAutoplay } = useStore()
 
