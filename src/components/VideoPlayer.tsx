@@ -497,7 +497,9 @@ hls.on(Hls.Events.MANIFEST_PARSED, () => {
   <>
     <div className="mx-4 my-2 h-px bg-white/[0.06]" />
 
-    <p className="px-4 py-2 text-xs text-white/40">Quality</p>
+<p className="px-4 py-2 text-xs text-white/40">
+  Quality ({currentQualityLabel})
+</p>
 
     <button
       className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-white/[0.06] text-sm"
