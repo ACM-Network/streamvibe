@@ -262,7 +262,7 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
           onClick={e => e.stopPropagation()}
         />
         {isLive && (
-  <div className="absolute top-4 left-4 flex items-center gap-2 bg-black/70 px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-sm">
+  <div className="absolute bottom-24 left-4 flex items-center gap-2 bg-black/70 px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-sm">
     <span className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse" />
     <span className="text-xs font-semibold text-white tracking-wide">
       LIVE
