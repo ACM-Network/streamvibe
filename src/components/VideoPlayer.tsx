@@ -44,6 +44,7 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
   const [duration, setDuration] = useState(0)
   const [buffered, setBuffered] = useState(0)
   const [volume, setVolume] = useState(playerVolume)
+  const [currentQualityLabel, setCurrentQualityLabel] = useState("Auto");
   const [muted, setMuted] = useState(playerMuted)
   const [fullscreen, setFullscreen] = useState(false)
   const [showControls, setShowControls] = useState(true) 
