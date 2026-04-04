@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react'
 import { TrendingUp, Zap, Clock, Radio } from 'lucide-react'
 import VideoCard from '@/components/VideoCard'
-import { MOCK_VIDEOS, CATEGORIES, Video } from '@/utils/mockData'
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 function CategoryChip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
@@ -33,22 +34,28 @@ function SkeletonCard() {
 
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState('All')
-  const [videos, setVideos] = useState<Video[]>([])
+  const [videos, setVideos] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
+ useEffect(() => {
+  const fetchVideos = async () => {
     setLoading(true)
-    const timeout = setTimeout(() => {
-      const filtered = activeCategory === 'All'
-        ? MOCK_VIDEOS
-        : MOCK_VIDEOS.filter(v => v.category === activeCategory || v.tags.includes(activeCategory))
-      setVideos(filtered.length > 0 ? filtered : MOCK_VIDEOS)
-      setLoading(false)
-    }, 600)
-    return () => clearTimeout(timeout)
-  }, [activeCategory])
 
-  const liveVideos = MOCK_VIDEOS.filter(v => v.isLive)
+    const querySnapshot = await getDocs(collection(db, "videos"))
+
+    const data: any[] = []
+    querySnapshot.forEach((doc) => {
+      data.push({ id: doc.id, ...doc.data() })
+    })
+
+    setVideos(data)
+    setLoading(false)
+  }
+
+  fetchVideos()
+}, [])
+
+    const liveVideos = videos.filter(v => v.isLive)
 
   return (
     <div className="min-h-screen">
