@@ -507,11 +507,13 @@ hls.on(Hls.Events.MANIFEST_PARSED, () => {
   Quality ({currentQualityLabel})
 </p>
 
-    <button
-      className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-white/[0.06] text-sm"
-      onClick={() => changeQuality(-1)}
-      setCurrentQualityLabel("Auto");
-    >
+<button
+  className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-white/[0.06] text-sm"
+  onClick={() => {
+    changeQuality(-1);
+    setCurrentQualityLabel("Auto");
+  }}
+>
       <span className={currentLevel === -1 ? 'text-brand-400 font-semibold' : 'text-white/80'}>
         Auto
       </span>
