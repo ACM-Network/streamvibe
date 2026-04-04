@@ -155,12 +155,8 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
       hls.loadSource(video.url);
       hls.attachMedia(vid);
 
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
   setLevels(hls.levels);
-
-  // default auto
-  setCurrentQualityLabel("Auto");
-
   vid.play().catch(() => {});
 });
 
