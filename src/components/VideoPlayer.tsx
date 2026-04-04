@@ -151,7 +151,10 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
   }
 
   return () => {
-    if (hls) {
+  if (hlsRef.current) {
+    hlsRef.current.destroy();
+  }
+};
       hls.destroy();
     }
   };
