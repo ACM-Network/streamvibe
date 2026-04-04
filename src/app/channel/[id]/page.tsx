@@ -48,7 +48,7 @@ console.log("DATA:", data)
 
   fetchvideos()
 }, [id])
-const video = videos.length > 0 ? videos[0] : null
+const video = videos?.[0] ?? null
 
 if (!video) {
   return <div className="text-white p-6">Loading...</div>
@@ -103,7 +103,7 @@ const notifications = notificationsEnabled.includes(video?.channelId || "")
               </button>
             )}
             <button
-              onClick={() => { toggleSubscription(video.channelId); toast(subscribed ? 'Unsubscribed' : `Subscribed to ${video?.channelName || "Unknown"}!`) }}
+              onClick={() => { toggleSubscription(video?.channelId || ""); toast(subscribed ? 'Unsubscribed' : `Subscribed to ${video?.channelName || "Unknown"}!`) }}
               className={clsx(
                 'px-6 py-2.5 rounded-full font-semibold text-sm transition-all',
                 subscribed ? 'bg-white/10 text-white/60 hover:bg-white/[0.15]' : 'bg-white text-black hover:bg-white/90 shadow-lg'
@@ -154,11 +154,11 @@ const notifications = notificationsEnabled.includes(video?.channelId || "")
             </div>
             {layout === 'grid' ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {videos.map(v => <VideoCard key={v.id} video={v} showChannel={false} />)}
+                {videos?.map(v => <VideoCard key={v.id} video={v} showChannel={false} />)}
               </div>
             ) : (
               <div className="space-y-6">
-                {videos.map(v => <VideoCard key={v.id} video={v} layout="list" showChannel={false} />)}
+                {videos?.map(v => <VideoCard key={v.id} video={v} layout="list" showChannel={false} />)}
               </div>
             )}
           </>
