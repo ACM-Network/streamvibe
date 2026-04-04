@@ -134,6 +134,7 @@ export const MOCK_VIDEOS: Video[] = [
     tags: ['Mountain Biking', 'Extreme Sports', 'Red Bull', 'Rampage'],
     category: 'Sports',
     url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+    isLive: false,
     is4K: true,
     quality: ['4K', '1080p', '720p', '480p'],
     subtitles: ['English'],
