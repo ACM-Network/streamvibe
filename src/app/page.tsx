@@ -97,7 +97,7 @@ export default function HomePage() {
       {/* Category Filter */}
       <div className="sticky top-16 z-30 bg-surface-950/90 backdrop-blur-md border-b border-white/[0.04] px-6 py-3">
         <div className="flex gap-2 overflow-x-auto scrollbar-hide">
-          {CATEGORIES.map(cat => (
+          {['All'].map(cat => (
             <CategoryChip
               key={cat}
               label={cat}
