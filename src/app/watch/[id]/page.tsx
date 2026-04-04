@@ -17,7 +17,7 @@ import { useStore } from '@/store/useStore'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
 
-function CommentItem({ comment, depth = 0 }: { comment: Comment; depth?: number }) {
+function CommentItem({ comment, depth = 0 }: { comment: any; depth?: number }) {
   const [showReplies, setShowReplies] = useState(false)
   const [liked, setLiked] = useState(false)
   const [disliked, setDisliked] = useState(false)
