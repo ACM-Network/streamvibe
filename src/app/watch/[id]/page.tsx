@@ -99,12 +99,12 @@ export default function WatchPage() {
   const router = useRouter()
   const [video, setVideo] = useState<any>(null);
   const docRef = doc(db, "videos", id)
-  const related = videos.filter(v => v.id !== id).slice(0, 6)
 
   const { likedVideos, dislikedVideos, savedVideos, subscriptions, notificationsEnabled, toggleLike, toggleDislike, toggleSaved, toggleSubscription, toggleNotification, addToQueue, autoplay, setAutoplay } = useStore()
 
   const liked = likedVideos.includes(video.id)
   const [videos, setVideos] = useState<any[]>([]);
+  const related = videos.filter(v => v.id !== id).slice(0, 6)
   const disliked = dislikedVideos.includes(video.id)
   const saved = savedVideos.includes(video.id)
   const subscribed = subscriptions.includes(video.channelId)
@@ -183,9 +183,9 @@ const handleAutoplayNext = () => {
     router.push(`/watch/${related[0].id}`)
   }
 };
+  if (!video) return <div className="text-white p-6">Loading...</div>;
 
   return (
-    if (!video) return <div className="text-white p-6">Loading...</div>;
     <div className={clsx('min-h-screen', theaterMode && 'bg-black')}>
       <div className={clsx(
         'flex gap-6',
