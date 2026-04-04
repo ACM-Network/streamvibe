@@ -39,6 +39,7 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
 };
   
   const [playing, setPlaying] = useState(false)
+  const [isBehindLive, setIsBehindLive] = useState(false);
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [buffered, setBuffered] = useState(0)
