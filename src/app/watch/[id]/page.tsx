@@ -19,7 +19,6 @@ import toast from 'react-hot-toast'
 
 function CommentItem({ comment, depth = 0 }: { comment: Comment; depth?: number }) {
   const [showReplies, setShowReplies] = useState(false)
-  const [views, setViews] = useState(0);
   const [liked, setLiked] = useState(false)
   const [disliked, setDisliked] = useState(false)
   const [replying, setReplying] = useState(false)
@@ -110,6 +109,26 @@ export default function WatchPage() {
   const [descExpanded, setDescExpanded] = useState(false)
   const [theaterMode, setTheaterMode] = useState(false)
   const [commentText, setCommentText] = useState('')
+  const [views, setViews] = useState(0);
+  useEffect(() => {
+  const fetchViews = async () => {
+    if (!id) return;
+
+    const docRef = doc(db, "videos", id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const currentViews = docSnap.data().views || 0;
+      setViews(currentViews);
+
+      await updateDoc(docRef, {
+        views: increment(1),
+      });
+    }
+  };
+
+  fetchViews();
+}, [id]);
   const [sortComments, setSortComments] = useState<'top' | 'new'>('top')
   const [shareModal, setShareModal] = useState(false)
   const [playlistModal, setPlaylistModal] = useState(false)
