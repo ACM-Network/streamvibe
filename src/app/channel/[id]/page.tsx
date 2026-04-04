@@ -2,11 +2,10 @@
 import { db } from "@/lib/firebase"
 import { collection, getDocs } from "firebase/firestore"
 import { useEffect, useState } from "react"
-import { useState } from 'react'
 import { useParams } from 'next/navigation'
 import { CheckCircle2, Bell, BellOff, Search, Grid, List } from 'lucide-react'
 import VideoCard from '@/components/VideoCard'
-import { MOCK_VIDEOS, formatSubscribers, formatViews } from '@/utils/mockData'
+import { formatSubscribers, formatViews } from '@/utils/mockData'
 import { useStore } from '@/store/useStore'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
@@ -17,14 +16,27 @@ export default function ChannelPage() {
   const { id } = useParams<{ id: string }>()
   const { subscriptions, notificationsEnabled, toggleSubscription, toggleNotification } = useStore()
 
-  const channelVideos = MOCK_VIDEOS.filter(v => v.channelId === id || true).slice(0, 12)
-  const video = channelVideos[0]
-  if (!video) return null
-
   const subscribed = subscriptions.includes(video.channelId)
   const notifications = notificationsEnabled.includes(video.channelId)
   const [activeTab, setActiveTab] = useState('Videos')
   const [videos, setVideos] = useState<any[]>([])
+  useEffect(() => {
+  const fetchVideos = async () => {
+    const snapshot = await getDocs(collection(db, "videos"))
+    const data: any[] = []
+
+    snapshot.forEach((doc) => {
+      data.push({ id: doc.id, ...doc.data() })
+    })
+
+    const filtered = data.filter(v => v.channelId === id)
+    setVideos(filtered)
+  }
+
+  fetchVideos()
+}, [id])
+  const video = videos[0]
+if (!video) return <div className="text-white p-6">Loading...</div>
   const [layout, setLayout] = useState<'grid' | 'list'>('grid')
   const [searchQuery, setSearchQuery] = useState('')
 
