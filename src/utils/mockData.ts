@@ -133,7 +133,7 @@ export const MOCK_VIDEOS: Video[] = [
     channelSubscribers: 22000000,
     tags: ['Mountain Biking', 'Extreme Sports', 'Red Bull', 'Rampage'],
     category: 'Sports',
-    url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+    url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
     is4K: true,
     quality: ['4K', '1080p', '720p', '480p'],
     subtitles: ['English'],
