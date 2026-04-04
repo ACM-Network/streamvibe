@@ -10,18 +10,16 @@ import { useStore } from '@/store/useStore'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
 
-const tabs = ['Home', 'Videos', 'Shorts', 'Playlists', 'Community', 'About']
+const tabs = ['Home', 'videos', 'Shorts', 'Playlists', 'Community', 'About']
 
 export default function ChannelPage() {
   const { id } = useParams<{ id: string }>()
   const { subscriptions, notificationsEnabled, toggleSubscription, toggleNotification } = useStore()
 
-  const subscribed = subscriptions.includes(video.channelId)
-  const notifications = notificationsEnabled.includes(video.channelId)
-  const [activeTab, setActiveTab] = useState('Videos')
-  const [videos, setVideos] = useState<any[]>([])
+  const [activeTab, setActiveTab] = useState('videos')
+  const [videos, setvideos] = useState<any[]>([])
   useEffect(() => {
-  const fetchVideos = async () => {
+  const fetchvideos = async () => {
     const snapshot = await getDocs(collection(db, "videos"))
     const data: any[] = []
 
@@ -30,13 +28,15 @@ export default function ChannelPage() {
     })
 
     const filtered = data.filter(v => v.channelId === id)
-    setVideos(filtered)
+    setvideos(filtered)
   }
 
-  fetchVideos()
+  fetchvideos()
 }, [id])
   const video = videos[0]
 if (!video) return <div className="text-white p-6">Loading...</div>
+  const subscribed = subscriptions.includes(video.channelId)
+  const notifications = notificationsEnabled.includes(video.channelId)
   const [layout, setLayout] = useState<'grid' | 'list'>('grid')
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -70,7 +70,7 @@ if (!video) return <div className="text-white p-6">Loading...</div>
               <span>·</span>
               <span>{formatSubscribers(video.channelSubscribers)} subscribers</span>
               <span>·</span>
-              <span>{Videos.length} videos</span>
+              <span>{videos.length} videos</span>
               <span>·</span>
               <span>{formatViews(video.views * 50)} views</span>
             </div>
@@ -117,7 +117,7 @@ if (!video) return <div className="text-white p-6">Loading...</div>
 
       {/* Content */}
       <div className="px-6 py-6">
-        {activeTab === 'Videos' && (
+        {activeTab === 'videos' && (
           <>
             <div className="flex items-center gap-3 mb-6">
               <div className="flex-1 flex items-center gap-2 bg-surface-800 border border-white/10 rounded-xl px-3 py-2">
@@ -136,11 +136,11 @@ if (!video) return <div className="text-white p-6">Loading...</div>
             </div>
             {layout === 'grid' ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {Videos.map(v => <VideoCard key={v.id} video={v} showChannel={false} />)}
+                {videos.map(v => <VideoCard key={v.id} video={v} showChannel={false} />)}
               </div>
             ) : (
               <div className="space-y-6">
-                {Videos.map(v => <VideoCard key={v.id} video={v} layout="list" showChannel={false} />)}
+                {videos.map(v => <VideoCard key={v.id} video={v} layout="list" showChannel={false} />)}
               </div>
             )}
           </>
@@ -171,7 +171,7 @@ if (!video) return <div className="text-white p-6">Loading...</div>
 
         {['Home', 'Shorts', 'Playlists', 'Community'].includes(activeTab) && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {Videos.slice(0, 8).map(v => <VideoCard key={v.id} video={v} showChannel={false} />)}
+            {videos.slice(0, 8).map(v => <VideoCard key={v.id} video={v} showChannel={false} />)}
           </div>
         )}
       </div>
