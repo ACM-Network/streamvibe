@@ -1,4 +1,7 @@
 'use client'
+import { db } from "@/lib/firebase"
+import { collection, getDocs } from "firebase/firestore"
+import { useEffect, useState } from "react"
 import { useState } from 'react'
 import { useParams } from 'next/navigation'
 import { CheckCircle2, Bell, BellOff, Search, Grid, List } from 'lucide-react'
@@ -21,6 +24,7 @@ export default function ChannelPage() {
   const subscribed = subscriptions.includes(video.channelId)
   const notifications = notificationsEnabled.includes(video.channelId)
   const [activeTab, setActiveTab] = useState('Videos')
+  const [videos, setVideos] = useState<any[]>([])
   const [layout, setLayout] = useState<'grid' | 'list'>('grid')
   const [searchQuery, setSearchQuery] = useState('')
 
