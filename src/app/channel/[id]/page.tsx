@@ -26,16 +26,19 @@ export default function ChannelPage() {
       data.push({ id: doc.id, ...doc.data() })
     })
 
-    const filtered = data.filter(v => v.channelId === id)
+    const filtered = data.filter(v => v?.channelId === id)
     setVideos(filtered)
   }
 
   fetchvideos()
 }, [id])
-  const video = videos[0]
-if (!video) return <div className="text-white p-6">Loading...</div>
-  const subscribed = subscriptions.includes(video.channelId)
-  const notifications = notificationsEnabled.includes(video.channelId)
+const video = videos.length > 0 ? videos[0] : null
+
+if (!video) {
+  return <div className="text-white p-6">Loading...</div>
+}
+const subscribed = subscriptions.includes(video?.channelId || "")
+const notifications = notificationsEnabled.includes(video?.channelId || "")
   const [layout, setLayout] = useState<'grid' | 'list'>('grid')
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -65,13 +68,13 @@ if (!video) return <div className="text-white p-6">Loading...</div>
               <CheckCircle2 size={18} className="text-brand-400" />
             </div>
             <div className="flex flex-wrap gap-3 text-sm text-white/40">
-              <span>@{(video.channelName || "unknown").toLowerCase().replace(/\s/g, '')}</span>
+              <span>@{(video?.channelName || "Unknown").toLowerCase().replace(/\s/g, '')}</span>
               <span>·</span>
-              <span>{formatSubscribers(video.channelSubscribers || 0)} subscribers</span>
+              <span>{formatSubscribers(video?.channelSubscribers || 0)} subscribers</span>
               <span>·</span>
               <span>{videos.length} videos</span>
               <span>·</span>
-              <span>{formatViews((video.views || 0) * 50)} views</span>
+              <span>{formatViews((video?.views || 0) * 50)} views</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -84,7 +87,7 @@ if (!video) return <div className="text-white p-6">Loading...</div>
               </button>
             )}
             <button
-              onClick={() => { toggleSubscription(video.channelId); toast(subscribed ? 'Unsubscribed' : `Subscribed to ${video.channelName || "Unknown"}!`) }}
+              onClick={() => { toggleSubscription(video.channelId); toast(subscribed ? 'Unsubscribed' : `Subscribed to ${video?.channelName || "Unknown"}!`) }}
               className={clsx(
                 'px-6 py-2.5 rounded-full font-semibold text-sm transition-all',
                 subscribed ? 'bg-white/10 text-white/60 hover:bg-white/[0.15]' : 'bg-white text-black hover:bg-white/90 shadow-lg'
@@ -149,7 +152,7 @@ if (!video) return <div className="text-white p-6">Loading...</div>
           <div className="max-w-2xl">
             <h2 className="font-display font-bold text-lg mb-4">About</h2>
             <p className="text-white/60 leading-relaxed mb-6">
-              Welcome to {video.channelName || "Unknown"}! We create high-quality content about technology, science, and the future. Join {formatSubscribers(video.channelSubscribers)} subscribers on this journey.
+              Welcome to {video?.channelName || "Unknown"}! We create high-quality content about technology, science, and the future. Join {formatSubscribers(video?.channelSubscribers || 0)} subscribers on this journey.
             </p>
             <div className="space-y-3 text-sm">
               <div className="flex items-center gap-3 text-white/50">
