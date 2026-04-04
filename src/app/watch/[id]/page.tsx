@@ -97,6 +97,7 @@ function CommentItem({ comment, depth = 0 }: { comment: any; depth?: number }) {
 export default function WatchPage() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
+  const [video, setVideo] = useState<any>(null);
   const docRef = doc(db, "videos", id)
   const related: any[] = []
 
@@ -131,6 +132,22 @@ export default function WatchPage() {
 
   fetchViews();
 }, [id]);
+
+  useEffect(() => {
+  const fetchVideo = async () => {
+    if (!id) return;
+
+    const docRef = doc(db, "videos", id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      setVideo({ id: docSnap.id, ...docSnap.data() });
+    }
+  };
+
+  fetchVideo();
+}, [id]);
+  
   const [sortComments, setSortComments] = useState<'top' | 'new'>('top')
   const [shareModal, setShareModal] = useState(false)
   const [playlistModal, setPlaylistModal] = useState(false)
@@ -145,13 +162,14 @@ export default function WatchPage() {
     setShareModal(false)
   }
 
-  const handleAutoplayNext = () => {
-    const idx = MOCK_VIDEOS.findIndex(v => v.id === video.id)
-    const next = MOCK_VIDEOS[(idx + 1) % MOCK_VIDEOS.length]
-    router.push(`/watch/${next.id}`)
+const handleAutoplayNext = () => {
+  if (related.length > 0) {
+    router.push(`/watch/${related[0].id}`)
   }
+};
 
   return (
+    if (!video) return <div className="text-white p-6">Loading...</div>;
     <div className={clsx('min-h-screen', theaterMode && 'bg-black')}>
       <div className={clsx(
         'flex gap-6',
