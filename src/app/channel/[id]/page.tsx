@@ -71,7 +71,7 @@ if (!video) return <div className="text-white p-6">Loading...</div>
               <span>·</span>
               <span>{videos.length} videos</span>
               <span>·</span>
-              <span>{formatViews(video.views * 50)} views</span>
+              <span>{formatViews((video.views || 0) * 50) views</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
