@@ -97,7 +97,6 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
     setIsBehindLive(diff > 3); // 3 seconds behind
   }
 };
-    }
     const onEnded = () => { setPlaying(false); setShowControls(true) }
 
     vid.addEventListener('loadedmetadata', onLoadedMetadata)
