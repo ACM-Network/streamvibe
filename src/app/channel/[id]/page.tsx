@@ -65,7 +65,7 @@ if (!video) return <div className="text-white p-6">Loading...</div>
               <CheckCircle2 size={18} className="text-brand-400" />
             </div>
             <div className="flex flex-wrap gap-3 text-sm text-white/40">
-              <span>@{video.channelName.toLowerCase().replace(/\s/g, '')}</span>
+              <span>@{(video.channelName || "unknown").toLowerCase().replace(/\s/g, '')}</span>
               <span>·</span>
               <span>{formatSubscribers(video.channelSubscribers || 0)} subscribers</span>
               <span>·</span>
