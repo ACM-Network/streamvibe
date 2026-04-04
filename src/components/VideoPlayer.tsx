@@ -164,6 +164,14 @@ hls.on(Hls.Events.MANIFEST_PARSED, () => {
   vid.play().catch(() => {});
 });
 
+      hls.on(Hls.Events.LEVEL_SWITCHED, (_, data) => {
+  const level = hls.levels[data.level];
+
+  if (level) {
+    setCurrentQualityLabel(`${level.height}p`);
+  }
+});
+
     } else if (vid.canPlayType("application/vnd.apple.mpegurl")) {
       vid.src = video.url;
     }
