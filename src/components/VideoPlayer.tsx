@@ -167,7 +167,13 @@ hls.on(Hls.Events.MANIFEST_PARSED, () => {
       hls.on(Hls.Events.LEVEL_SWITCHED, (_, data) => {
   const level = hls.levels[data.level];
 
-  if (level) {
+  if (!level) return;
+
+  if (hls.currentLevel === -1) {
+    // Auto mode
+    setCurrentQualityLabel(`Auto (${level.height}p)`);
+  } else {
+    // Manual mode
     setCurrentQualityLabel(`${level.height}p`);
   }
 });
