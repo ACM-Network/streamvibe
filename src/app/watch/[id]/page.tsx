@@ -84,7 +84,9 @@ function CommentItem({ comment, depth = 0 }: { comment: any; depth?: number }) {
         )}
         {showReplies && (
           <div className="mt-4 space-y-4">
-            {comment.replies.map(r => <CommentItem key={r.id} comment={r} depth={depth + 1} />)}
+            {comment.replies.map((r: any) => (
+  <CommentItem key={r.id} comment={r} depth={depth + 1} />
+))}
           </div>
         )}
       </div>
