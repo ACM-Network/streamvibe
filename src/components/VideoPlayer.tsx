@@ -414,6 +414,20 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
               {formatDuration(Math.floor(currentTime))} / {formatDuration(Math.floor(duration))}
             </span>
 
+            {isLive && (
+  <button
+    onClick={goToLive}
+    className={clsx(
+      "ml-3 px-2 py-0.5 rounded-full text-xs font-semibold transition",
+      isBehindLive
+        ? "bg-red-600 text-white animate-pulse"
+        : "bg-white/20 text-white/70"
+    )}
+  >
+    LIVE
+  </button>
+)}
+
             {/* Spacer */}
             <div className="flex-1" />
 
