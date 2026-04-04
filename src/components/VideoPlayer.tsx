@@ -97,10 +97,6 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
     setIsBehindLive(diff > 3); // 3 seconds behind
   }
 };
-      setCurrentTime(vid.currentTime)
-      if (vid.buffered.length > 0) {
-        setBuffered(vid.buffered.end(vid.buffered.length - 1))
-      }
     }
     const onEnded = () => { setPlaying(false); setShowControls(true) }
 
