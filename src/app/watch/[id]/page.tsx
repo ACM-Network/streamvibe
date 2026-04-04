@@ -1,5 +1,12 @@
 'use client'
-import { doc, getDoc, updateDoc, increment } from "firebase/firestore";
+import { 
+  doc, 
+  getDoc, 
+  getDocs,
+  collection, 
+  updateDoc, 
+  increment 
+} from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
