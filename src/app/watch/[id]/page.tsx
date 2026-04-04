@@ -167,8 +167,8 @@ export default function WatchPage() {
             <div className="flex flex-wrap items-center justify-between gap-4 mt-3">
               <p className="text-sm text-white/40">
                 {video.isLive
-                  ? <><span className="text-red-400 font-semibold">{formatViews(video.views)} watching live</span></>
-                  : <>{formatViews(video.views)} views · {formatTimeAgo(video.uploadedAt)}</>
+                  ? <><span className="text-red-400 font-semibold">{formatViews(views)} watching live</span></>
+                  : <>{formatViews(views))} views · {formatTimeAgo(video.uploadedAt)}</>
                 }
               </p>
 
