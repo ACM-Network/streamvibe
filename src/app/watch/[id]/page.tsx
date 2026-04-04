@@ -363,7 +363,7 @@ const handleAutoplayNext = () => {
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mt-3">
-                  video.tags.map((tag: any) => (
+                  {video.tags?.map((tag: any) => (
                     <Link key={tag} href={`/search?q=${tag}`} className="text-xs text-brand-400 hover:text-brand-300 transition-colors">
                       #{tag}
                     </Link>
