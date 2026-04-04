@@ -38,7 +38,11 @@ export default function ChannelPage() {
   })
 })
 
-    const filtered = data.filter(v => v?.channelId && v.channelId === id)
+    const filtered = data.filter(
+  v => v?.channelId?.toLowerCase().trim() === id?.toLowerCase().trim()
+)
+    console.log("ID:", id)
+console.log("DATA:", data)
     setVideos(filtered)
   }
 
