@@ -25,7 +25,7 @@ function CommentItem({ comment, depth = 0 }: { comment: Comment; depth?: number 
   const [replyText, setReplyText] = useState('')
 
   return (
-    <div Name={clsx('flex gap-3', depth > 0 && 'ml-10')}>
+     <div className={clsx('flex gap-3', depth > 0 && 'ml-10')}>
       <img src={comment.userAvatar} alt={comment.userName} className="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-0.5" />
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
