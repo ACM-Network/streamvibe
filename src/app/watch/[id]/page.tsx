@@ -36,11 +36,11 @@ function CommentItem({ comment, depth = 0 }: { comment: any; depth?: number }) {
       <img src={comment.userAvatar || "/default.png"} alt={comment.userName || "User"} className="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-0.5" />
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-sm font-semibold text-white/90">{comment.userName}</span>
+          <span className="text-sm font-semibold text-white/90">{comment.userName || "User"}</span>
           {comment.pinned && (
             <span className="text-xs text-brand-400 bg-brand-500/10 px-2 py-0.5 rounded-full border border-brand-500/20">Pinned</span>
           )}
-          <span className="text-xs text-white/30">{formatTimeAgo(comment.timestamp)}</span>
+          <span className="text-xs text-white/30">{formatTimeAgo(comment.timestamp || Date.now())}</span>
         </div>
         <p className="text-sm text-white/75 mt-1 leading-relaxed">{comment.text}</p>
         {comment.creatorHeart && (
@@ -55,7 +55,7 @@ function CommentItem({ comment, depth = 0 }: { comment: any; depth?: number }) {
             onClick={() => setLiked(l => !l)}
           >
             <ThumbsUp size={13} className={liked ? 'text-brand-400 fill-current' : ''} />
-            <span>{formatViews(comment.likes + (liked ? 1 : 0))}</span>
+            <span>{formatViews((comment.likes || 0) + (liked ? 1 : 0))}</span>
           </button>
           <button className="text-xs text-white/40 hover:text-white transition-colors" onClick={() => setDisliked(d => !d)}>
             <ThumbsDown size={13} className={disliked ? 'text-red-400 fill-current' : ''} />
