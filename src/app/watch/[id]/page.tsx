@@ -230,7 +230,7 @@ const handleAutoplayNext = () => {
               <p className="text-sm text-white/40">
   {video.isLive
     ? <><span className="text-red-400 font-semibold">{formatViews(views)} watching live</span></>
-    : <>{formatViews(views)} views · {formatTimeAgo(video.uploadedAt)}</>
+    : <>{formatViews(views)} views · {formatTimeAgo(video.uploadedAt || Date.now())}</>
   }
 </p>
 
@@ -246,7 +246,7 @@ const handleAutoplayNext = () => {
                     )}
                   >
                     <ThumbsUp size={15} className={liked ? 'fill-current' : ''} />
-                    <span>{formatViews(video.likes + (liked ? 1 : 0))}</span>
+                    <span>{formatViews((video.likes || 0) + (liked ? 1 : 0))}</span>
                   </button>
                   <button
                     onClick={() => toggleDislike(video.id)}
@@ -316,13 +316,16 @@ const handleAutoplayNext = () => {
             <div className="mt-4 p-4 rounded-2xl bg-surface-850/60 border border-white/[0.05]">
               <div className="flex items-center justify-between flex-wrap gap-3">
                 <Link href={`/channel/${video.channelId}`} className="flex items-center gap-3 group">
-                  <img src={video.channelAvatar} alt={video.channelName} className="w-11 h-11 rounded-full object-cover ring-2 ring-white/10 group-hover:ring-brand-500/40 transition-all" />
+                 <img 
+  src={video.channelAvatar || "/default.png"} 
+  alt={video.channelName || "Channel"} 
+/> className="w-11 h-11 rounded-full object-cover ring-2 ring-white/10 group-hover:ring-brand-500/40 transition-all" />
                   <div>
                     <div className="flex items-center gap-1.5">
                       <span className="font-semibold text-white group-hover:text-brand-300 transition-colors">{video.channelName}</span>
                       <CheckCircle2 size={14} className="text-brand-400" />
                     </div>
-                    <p className="text-xs text-white/40">{formatSubscribers(video.channelSubscribers)} subscribers</p>
+                    <p className="text-xs text-white/40">{formatSubscribers(video.channelSubscribers || 0)} subscribers</p>
                   </div>
                 </Link>
 
