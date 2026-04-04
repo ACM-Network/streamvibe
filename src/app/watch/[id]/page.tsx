@@ -26,7 +26,7 @@ function CommentItem({ comment, depth = 0 }: { comment: Comment; depth?: number 
   const [replyText, setReplyText] = useState('')
 
   return (
-    <div className={clsx('flex gap-3', depth > 0 && 'ml-10')}>
+    <div Name={clsx('flex gap-3', depth > 0 && 'ml-10')}>
       <img src={comment.userAvatar} alt={comment.userName} className="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-0.5" />
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
@@ -166,11 +166,11 @@ export default function WatchPage() {
             {/* Stats + Actions */}
             <div className="flex flex-wrap items-center justify-between gap-4 mt-3">
               <p className="text-sm text-white/40">
-                {video.isLive
-                  ? <><span className="text-red-400 font-semibold">{formatViews(views)} watching live</span></>
-                  : <>{formatViews(views))} views · {formatTimeAgo(video.uploadedAt)}</>
-                }
-              </p>
+  {video.isLive
+    ? <><span className="text-red-400 font-semibold">{formatViews(views)} watching live</span></>
+    : <>{formatViews(views)} views · {formatTimeAgo(video.uploadedAt)}</>
+  }
+</p>
 
               {/* Action buttons */}
               <div className="flex items-center gap-2 flex-wrap">
