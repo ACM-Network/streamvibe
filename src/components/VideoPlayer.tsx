@@ -155,9 +155,6 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
     hlsRef.current.destroy();
   }
 };
-      hls.destroy();
-    }
-  };
 }, [video]);
   
   // Keyboard shortcuts
