@@ -392,7 +392,7 @@ const handleAutoplayNext = () => {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <MessageSquare size={18} className="text-white/40" />
-                  <h3 className="font-display font-semibold text-base text-white">{formatViews(Math.floor(MOCK_COMMENTS.length * 840))} Comments</h3>
+                  <h3 className="font-display font-semibold text-base text-white"> 0 Comments</h3>
                 </div>
                 <button
                   className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
