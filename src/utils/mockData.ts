@@ -545,7 +545,7 @@ export const CATEGORIES = [
   'All', 'Technology', 'Sports', 'Music', 'Gaming', 'Education',
   'Entertainment', 'Science', 'Travel', 'Food', 'Health', 'Art',
   'Business', 'Adventure', 'News', 'Comedy', 'Fashion', 'DIY',
-]
+];
 
 export function formatViews(views: number): string {
   if (views >= 1_000_000_000) return `${(views / 1_000_000_000).toFixed(1)}B`
