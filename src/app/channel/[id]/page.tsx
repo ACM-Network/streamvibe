@@ -55,19 +55,19 @@ if (!video) return <div className="text-white p-6">Loading...</div>
       <div className="px-6 pb-0">
         <div className="flex flex-col sm:flex-row sm:items-end gap-4 -mt-12 relative z-10 mb-6">
           <img
-            src={video.channelAvatar}
-            alt={video.channelName}
+            src={video.channelAvatar || "https://via.placeholder.com/100"}
+            alt={video.channelName || "Unknown"}
             className="w-24 h-24 rounded-full object-cover ring-4 ring-surface-950"
           />
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-1">
-              <h1 className="font-display font-bold text-2xl text-white">{video.channelName}</h1>
+              <h1 className="font-display font-bold text-2xl text-white">{video.channelName || "Unknown"}</h1>
               <CheckCircle2 size={18} className="text-brand-400" />
             </div>
             <div className="flex flex-wrap gap-3 text-sm text-white/40">
               <span>@{video.channelName.toLowerCase().replace(/\s/g, '')}</span>
               <span>·</span>
-              <span>{formatSubscribers(video.channelSubscribers)} subscribers</span>
+              <span>{formatSubscribers(video.channelSubscribers || 0)} subscribers</span>
               <span>·</span>
               <span>{videos.length} videos</span>
               <span>·</span>
@@ -84,7 +84,7 @@ if (!video) return <div className="text-white p-6">Loading...</div>
               </button>
             )}
             <button
-              onClick={() => { toggleSubscription(video.channelId); toast(subscribed ? 'Unsubscribed' : `Subscribed to ${video.channelName}!`) }}
+              onClick={() => { toggleSubscription(video.channelId); toast(subscribed ? 'Unsubscribed' : `Subscribed to ${video.channelName || "Unknown"}!`) }}
               className={clsx(
                 'px-6 py-2.5 rounded-full font-semibold text-sm transition-all',
                 subscribed ? 'bg-white/10 text-white/60 hover:bg-white/[0.15]' : 'bg-white text-black hover:bg-white/90 shadow-lg'
@@ -149,7 +149,7 @@ if (!video) return <div className="text-white p-6">Loading...</div>
           <div className="max-w-2xl">
             <h2 className="font-display font-bold text-lg mb-4">About</h2>
             <p className="text-white/60 leading-relaxed mb-6">
-              Welcome to {video.channelName}! We create high-quality content about technology, science, and the future. Join {formatSubscribers(video.channelSubscribers)} subscribers on this journey.
+              Welcome to {video.channelName || "Unknown"}! We create high-quality content about technology, science, and the future. Join {formatSubscribers(video.channelSubscribers)} subscribers on this journey.
             </p>
             <div className="space-y-3 text-sm">
               <div className="flex items-center gap-3 text-white/50">
