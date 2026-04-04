@@ -99,11 +99,12 @@ export default function WatchPage() {
   const router = useRouter()
   const [video, setVideo] = useState<any>(null);
   const docRef = doc(db, "videos", id)
-  const related: any[] = []
+  const related = videos.filter(v => v.id !== id).slice(0, 6)
 
   const { likedVideos, dislikedVideos, savedVideos, subscriptions, notificationsEnabled, toggleLike, toggleDislike, toggleSaved, toggleSubscription, toggleNotification, addToQueue, autoplay, setAutoplay } = useStore()
 
   const liked = likedVideos.includes(video.id)
+  const [videos, setVideos] = useState<any[]>([]);
   const disliked = dislikedVideos.includes(video.id)
   const saved = savedVideos.includes(video.id)
   const subscribed = subscriptions.includes(video.channelId)
@@ -132,6 +133,21 @@ export default function WatchPage() {
 
   fetchViews();
 }, [id]);
+
+  useEffect(() => {
+  const fetchAllVideos = async () => {
+    const querySnapshot = await getDocs(collection(db, "videos"));
+    const data: any[] = [];
+
+    querySnapshot.forEach((doc) => {
+      data.push({ id: doc.id, ...doc.data() });
+    });
+
+    setVideos(data);
+  };
+
+  fetchAllVideos();
+}, []);
 
   useEffect(() => {
   const fetchVideo = async () => {
@@ -404,7 +420,7 @@ const handleAutoplayNext = () => {
 
               {/* Comments List */}
               <div className="space-y-6">
-                {MOCK_COMMENTS.map(c => <CommentItem key={c.id} comment={c} />)}
+                {[].map(c => <CommentItem key={c.id} comment={c} />)}
               </div>
             </div>
           </div>
