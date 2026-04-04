@@ -23,8 +23,20 @@ export default function ChannelPage() {
     const data: any[] = []
 
     snapshot.forEach((doc) => {
-      data.push({ id: doc.id, ...doc.data() })
-    })
+  const d: any = doc.data()
+
+  data.push({
+    id: doc.id,
+    title: d.title || "",
+    channelId: d.channelId || "",
+    channelName: d.channelName || "Unknown",
+    channelAvatar: d.channelAvatar || "https://via.placeholder.com/100",
+    channelSubscribers: Number(d.channelSubscribers) || 0,
+    views: Number(d.views) || 0,
+    thumbnail: d.thumbnail || "",
+    url: d.url || "",
+  })
+})
 
     const filtered = data.filter(v => v?.channelId && v.channelId === id)
     setVideos(filtered)
