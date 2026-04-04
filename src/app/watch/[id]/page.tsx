@@ -80,7 +80,7 @@ function CommentItem({ comment, depth = 0 }: { comment: any; depth?: number }) {
             <button className="px-3 py-2 rounded-xl hover:bg-white/10 text-white/50 text-sm" onClick={() => setReplying(false)}>Cancel</button>
           </div>
         )}
-        {comment.replies.length > 0 && (
+        {comment.replies?.length > 0 && (
           <button
             className="mt-3 flex items-center gap-2 text-sm text-brand-400 hover:text-brand-300 font-medium transition-colors"
             onClick={() => setShowReplies(s => !s)}
@@ -91,7 +91,7 @@ function CommentItem({ comment, depth = 0 }: { comment: any; depth?: number }) {
         )}
         {showReplies && (
           <div className="mt-4 space-y-4">
-            {comment.replies.map((r: any) => (
+            {comment.replies?.map((r: any) => (
   <CommentItem key={r.id} comment={r} depth={depth + 1} />
 ))}
           </div>
@@ -109,13 +109,13 @@ export default function WatchPage() {
 
   const { likedVideos, dislikedVideos, savedVideos, subscriptions, notificationsEnabled, toggleLike, toggleDislike, toggleSaved, toggleSubscription, toggleNotification, addToQueue, autoplay, setAutoplay } = useStore()
 
-  const liked = likedVideos.includes(video.id)
+  const liked = video ? likedVideos.includes(video.id) : false
   const [videos, setVideos] = useState<any[]>([]);
   const related = videos.filter(v => v.id !== id).slice(0, 6)
-  const disliked = dislikedVideos.includes(video.id)
-  const saved = savedVideos.includes(video.id)
-  const subscribed = subscriptions.includes(video.channelId)
-  const notifications = notificationsEnabled.includes(video.channelId)
+  const disliked = video ? dislikedVideos.includes(video.id) : false
+  const saved = video ? savedVideos.includes(video.id) : false
+  const subscribed = video ? subscriptions.includes(video.channelId) : false
+  const notifications = video ? notificationsEnabled.includes(video.channelId) : false
 
   const [descExpanded, setDescExpanded] = useState(false)
   const [theaterMode, setTheaterMode] = useState(false)
