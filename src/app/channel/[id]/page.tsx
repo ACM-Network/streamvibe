@@ -10,14 +10,13 @@ import { useStore } from '@/store/useStore'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
 
-const tabs = ['Home', 'videos', 'Shorts', 'Playlists', 'Community', 'About']
-
+const tabs = ['Home', 'Videos', 'Shorts', 'Playlists', 'Community', 'About']
 export default function ChannelPage() {
   const { id } = useParams<{ id: string }>()
   const { subscriptions, notificationsEnabled, toggleSubscription, toggleNotification } = useStore()
 
-  const [activeTab, setActiveTab] = useState('videos')
-  const [videos, setvideos] = useState<any[]>([])
+  const [activeTab, setActiveTab] = useState('Videos')
+  const [videos, setVideos] = useState<any[]>([])
   useEffect(() => {
   const fetchvideos = async () => {
     const snapshot = await getDocs(collection(db, "videos"))
@@ -28,7 +27,7 @@ export default function ChannelPage() {
     })
 
     const filtered = data.filter(v => v.channelId === id)
-    setvideos(filtered)
+    setVideos(filtered)
   }
 
   fetchvideos()
@@ -117,7 +116,7 @@ if (!video) return <div className="text-white p-6">Loading...</div>
 
       {/* Content */}
       <div className="px-6 py-6">
-        {activeTab === 'videos' && (
+        {activeTab === 'Videos' && (
           <>
             <div className="flex items-center gap-3 mb-6">
               <div className="flex-1 flex items-center gap-2 bg-surface-800 border border-white/10 rounded-xl px-3 py-2">
