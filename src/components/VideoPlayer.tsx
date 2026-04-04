@@ -30,7 +30,7 @@ export default function VideoPlayer({ video, autoplay = false, onEnded, theaterM
   const hlsRef = useRef<Hls | null>(null);
   const { playerVolume, setPlayerVolume, playerMuted, setPlayerMuted, addToHistory } = useStore()
 
-  const isLive = video?.url?.includes(".m3u8");
+  const isLive = video?.isLive ?? false;
   const goToLive = () => {
   const vid = videoRef.current;
   if (!vid) return;
