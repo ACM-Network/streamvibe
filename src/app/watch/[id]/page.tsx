@@ -377,7 +377,7 @@ const handleAutoplayNext = () => {
               <div className="mt-4 p-4 rounded-2xl bg-surface-850/60 border border-white/[0.05]">
                 <h3 className="font-display font-semibold text-sm text-white/80 mb-3">Chapters</h3>
                 <div className="space-y-2">
-                  {video.chapters.map((c, i) => (
+                  {video.chapters?.map((c: any, i: number) => (
                     <button key={i} className="w-full flex items-center gap-3 py-2 px-3 rounded-xl hover:bg-white/[0.06] transition-colors group text-left">
                       <span className="text-xs font-mono text-brand-400 w-12 flex-shrink-0">{Math.floor(c.time / 60)}:{(c.time % 60).toString().padStart(2, '0')}</span>
                       <span className="text-sm text-white/70 group-hover:text-white transition-colors">{c.title}</span>
